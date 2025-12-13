@@ -17,7 +17,7 @@ def tokenize(token):
         text,
         truncation=True,
         padding="max_length",
-        max_length=1024
+        max_length=512
     )
 
 #load and tokenize corpus
@@ -47,15 +47,17 @@ lora_model = get_peft_model(model, config)
 #Set up training
 args = TrainingArguments(
     output_dir="./output",
-    per_device_train_batch_size=4,
-    per_device_eval_batch_size=4,
+    per_device_train_batch_size=1,
+    per_device_eval_batch_size=1,
     learning_rate=1e-4,
-    num_train_epochs=6,
+    max_steps=200,
+    #num_train_epochs=3,
     logging_dir="./logs",
     eval_strategy="steps",
+    eval_steps=50,
     save_strategy="steps",
-    save_steps=500,
-    logging_steps=100,
+    save_steps=50,
+    logging_steps=10,
     fp16=True,
     push_to_hub=False
 )
