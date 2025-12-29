@@ -38,7 +38,8 @@ config = LoraConfig(
     target_modules=["query_key_value", "dense"],
     lora_dropout=0.05,
     bias="none",
-    task_type="CAUSAL_LM"
+    task_type="CAUSAL_LM",
+    modules_to_save=["embed_out"]
 )
 
 #Confgiure the model with LoRA
@@ -50,7 +51,7 @@ args = TrainingArguments(
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     learning_rate=1e-4,
-    max_steps=200,
+    max_steps=500,
     #num_train_epochs=3,
     logging_dir="./logs",
     eval_strategy="steps",
@@ -72,5 +73,5 @@ trainer = Trainer(
 trainer.train()
 
 #save adapter
-lora_model.save_pretrained(r"C:\Users\callu\Documents\Job_Fantasy\adapters\fantasy_adapater")#choose best name for the adapter
+lora_model.save_pretrained(r"adapters\fantasy_adapter")#Windows, choose best name for the adapter
 
