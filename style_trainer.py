@@ -1,6 +1,22 @@
+import os
 from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer
 from peft import LoraConfig, get_peft_model
 from datasets import load_dataset
+
+#Basic settings
+NEW = True
+CORPUS = "fantasy_mini-corpus.json"
+MAX = 1000
+CHECKPOINT = 500
+
+#create portable save path
+label = CORPUS.split("_")
+folder = label[0] + "_adapter"
+save_loc = os.path.join("adapters", folder)
+
+#create portable checkpoint path
+check_folder = "checkpoint-" + str(CHECKPOINT)
+check_path = os.path.join("output", check_folder)
 
 #Set up pretrained model
 model_name = "EleutherAI/pythia-2.8b" 
@@ -21,7 +37,7 @@ def tokenize(token):
     )
 
 #load and tokenize corpus
-dataset = load_dataset("json", data_files="fantasy_mini-corpus.json", split="train")#chainge data_files to the name of the corpus
+dataset = load_dataset("json", data_files=CORPUS, split="train")
 tokens = dataset.map(tokenize, batched=True)
 tokens = tokens.map(
     lambda x: {"labels": x["input_ids"]}, batched=True
@@ -51,8 +67,7 @@ args = TrainingArguments(
     per_device_train_batch_size=1,
     per_device_eval_batch_size=1,
     learning_rate=1e-4,
-    max_steps=500,
-    #num_train_epochs=3,
+    max_steps=MAX,
     logging_dir="./logs",
     eval_strategy="steps",
     eval_steps=50,
@@ -70,8 +85,12 @@ trainer = Trainer(
 )
 
 #fine tune
-trainer.train()
+
+if NEW == True:
+    trainer.train()
+else:
+    trainer.train(resume_from_checkpoint=check_path)
 
 #save adapter
-lora_model.save_pretrained(r"adapters\fantasy_adapter")#Windows, choose best name for the adapter
+lora_model.save_pretrained(save_loc)
 
