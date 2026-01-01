@@ -9,16 +9,11 @@ from datasets import load_dataset
 NEW = sys.argv[1]
 CORPUS = sys.argv[2]
 MAX = int(sys.argv[3])
-CHECKPOINT = 500
 
 #create portable save path
 label = CORPUS.split("_")
 folder = label[0] + "_adapter"
 save_loc = os.path.join("adapters", folder)
-
-#create portable checkpoint path
-check_folder = "checkpoint-" + str(CHECKPOINT)
-check_path = os.path.join("output", check_folder)
 
 #Set up pretrained model
 model_name = "EleutherAI/pythia-2.8b" 
@@ -91,7 +86,7 @@ trainer = Trainer(
 if NEW == True:
     trainer.train()
 else:
-    trainer.train(resume_from_checkpoint=check_path)
+    trainer.train(resume_from_checkpoint=True)
 
 #save adapter
 lora_model.save_pretrained(save_loc)
