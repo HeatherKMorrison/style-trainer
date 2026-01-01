@@ -1,12 +1,14 @@
 import os
+import re
+import sys
 from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer
 from peft import LoraConfig, get_peft_model
 from datasets import load_dataset
 
 #Basic settings
-NEW = True
-CORPUS = "fantasy_mini-corpus.json"
-MAX = 1000
+NEW = sys.argv[1]
+CORPUS = sys.argv[2]
+MAX = int(sys.argv[3])
 CHECKPOINT = 500
 
 #create portable save path

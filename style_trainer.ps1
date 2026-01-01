@@ -59,6 +59,5 @@ while(-not $valid){
 		Start-Sleep -Seconds 1
 	}
 }
-Write-Host $corpora[$corpus].Name
-Write-Host $fresh
-Write-Host $total
+
+python style_trainer.py $fresh $corpora[$corpus].Name $total
