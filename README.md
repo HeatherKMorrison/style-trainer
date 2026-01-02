@@ -5,6 +5,20 @@ A user friendly tool for fine-tuning the output of Pythia 2.8b to unique styles 
 
 The purpose of this tool is to provide a simplified means of fine-tuning a pretrained LLM's output style. This requires little more than a basic understanding of command line and using python.
 
+## Requirements  
+
+This project was created with Python 3.12.3  
+
+The following additional packages are required:  
+
+transformers  
+peft  
+datasets  
+
+They can be installed using requirements.txt:  
+
+pip install -r requirements.txt  
+
 ## Quickstart  
 
 Using a Powershell terminal navigate to the folder containing this tool and corpus files.  
