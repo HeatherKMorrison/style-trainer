@@ -7,7 +7,9 @@ The purpose of this tool is to provide a simplified means of fine-tuning a pretr
 
 ## Requirements  
 
-This project was created with Python 3.12.3  
+This project was created with Python 3.12.3. It can be downloaded from here:  
+
+https://www.python.org/downloads/  
 
 The following additional packages are required:  
 
