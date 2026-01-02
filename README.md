@@ -7,4 +7,10 @@ The purpose of this tool is to provide a simplified means of fine-tuning a pretr
 
 ## Quickstart  
 
-Open powershell and navigate to the folder containing this tool and corpus files. Enter ./style_trainer.p1 and follow the prompts to begin or resume training.
+Using a Powershell terminal navigate to the folder containing this tool and corpus files.  
+
+cd path\to\project  
+
+Run the script and follow the prompts to begin or resume training.  
+
+./style_trainer.p1
