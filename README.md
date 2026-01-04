@@ -23,10 +23,18 @@ pip install -r requirements.txt
 
 ## Quickstart  
 
-Using a Powershell terminal navigate to the folder containing this tool and corpus files.  
+Using a command line terminal navigate to the folder containing this tool and corpus files.  
 
-cd path\to\project  
+Powershell:  
+cd path\to\project 
+
+Bash:  
+cd path/to/project  
 
 Run the script and follow the prompts to begin or resume training.  
 
-./style_trainer.p1
+Powershell:  
+./style_trainer.p1  
+
+Bash:  
+bash style_trainer.sh
