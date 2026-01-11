@@ -12,7 +12,15 @@ while [[ $valid == false ]]; do
 		echo "$i: $corpus"
 		((i++))
 	done
+	int=false
+	while [[ $int == false ]]; do
 	read -p "Please enter a number:" number
+		if [[ -v corpora[$number] ]]; then
+			int=true
+		else
+			echo "Invalid input."
+		fi
+	done
 	echo "You selected ${corpora[$number]}."
 	while [[ $yesno == false ]]; do
 		read -p "Is this correct? (y)es or (n)o: " confirm
