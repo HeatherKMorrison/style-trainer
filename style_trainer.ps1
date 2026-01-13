@@ -6,7 +6,7 @@ while (-not $valid){
 	for ($i = 0; $i -lt $corpora.Count; $i++){
 		Write-Host "${i}: $($corpora[$i].Name)"
 	}
-	$corpus = [int](Read-Host "Please enter a number:")
+	$corpus = [int](Read-Host "Please enter a number")
 	if ($corpus -ge 0 -and $corpus -lt $corpora.Count){
 		Write-Host "You selected $($corpora[$corpus].Name)"
 		$yesno = $false
@@ -59,5 +59,6 @@ while(-not $valid){
 		Start-Sleep -Seconds 1
 	}
 }
+
 
 python style_trainer.py $fresh $(Join-Path "corpora" $corpora[$corpus].Name) $total
