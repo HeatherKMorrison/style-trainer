@@ -34,7 +34,7 @@ cd path/to/project
 Run the script and follow the prompts to begin or resume training.  
 
 Powershell:  
-./style_trainer.p1  
+powershell -executionpolicy bypass -File .\style_trainer.ps1 
 
 Bash:  
 bash style_trainer.sh
