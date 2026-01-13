@@ -1,4 +1,4 @@
-$corpora = Get-ChildItem -Filter *.json
+$corpora = @(Get-ChildItem -Path ".\corpora" -Filter "*.json")
 $valid = $false
 while (-not $valid){
 	Write-Host "Which corpus would you like to fine-tune with?"
@@ -6,7 +6,7 @@ while (-not $valid){
 	for ($i = 0; $i -lt $corpora.Count; $i++){
 		Write-Host "${i}: $($corpora[$i].Name)"
 	}
-	$corpus = [int](Read-Host "Please enter a number")
+	$corpus = [int](Read-Host "Please enter a number:")
 	if ($corpus -ge 0 -and $corpus -lt $corpora.Count){
 		Write-Host "You selected $($corpora[$corpus].Name)"
 		$yesno = $false
@@ -60,4 +60,4 @@ while(-not $valid){
 	}
 }
 
-python style_trainer.py $fresh $corpora[$corpus].Name $total
+python style_trainer.py $fresh $(Join-Path "corpora" $corpora[$corpus].Name) $total

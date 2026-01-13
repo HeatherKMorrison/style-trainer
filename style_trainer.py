@@ -83,10 +83,11 @@ trainer = Trainer(
 
 #fine tune
 
-if NEW == True:
+if NEW == "true" or NEW == "True":
     trainer.train()
 else:
     trainer.train(resume_from_checkpoint=True)
+    
 
 #save adapter
 lora_model.save_pretrained(save_loc)

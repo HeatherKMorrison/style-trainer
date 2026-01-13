@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-corpora=( *.json )
+corpora=( corpora/*.json )
 valid=false
 
 while [[ $valid == false ]]; do
 	yesno=false
-	
 	echo "Which corpus would you like to fine-tune with?"
 	i=0
 	for corpus in "${corpora[@]}"; do
-		echo "$i: $corpus"
+		name=${corpus##*/}
+		echo "$i: $name"
 		((i++))
 	done
 	int=false
@@ -43,10 +43,10 @@ while [[ $valid == false ]]; do
 	read -p "Is this a new adapter? (y)es or (n)o: " new
 	fresh=true
 	shopt -s nocasematch
-	if [[ new == y* ]]; then
+	if [[ $new == y* ]]; then
 		valid=true
 				
-	elif [[ new == n* ]]; then
+	elif [[ $new == n* ]]; then
 		fresh=false
 		valid=true
 	else
@@ -68,4 +68,4 @@ while [[ $valid == false ]]; do
 	fi
 done
 
-python style_trainer.py $fresh ${corpora[$number]} $steps
+python style_trainer.py $fresh "${corpora[$number]}" $steps
